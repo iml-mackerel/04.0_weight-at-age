@@ -20,7 +20,8 @@ dir.Rdata <- 'Rdata/'
 ##### source src directory  ################################################################################
 invisible(sapply(list.files(pattern="[.]R$", path="R/", full.names=TRUE), source))
 
-
 ##### my ggplot theme ################################################################################
 theme_set(theme_mackerel())             # theme_mackerel from catchR
 
+##### passwords databases #############################################################################
+source('passwords.R')
