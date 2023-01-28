@@ -21,6 +21,8 @@ options(width = 300)
 
 ```{r settings, message = F}
 source('0.0_settings.R')
+
+this.year <- 2022
 ```
 
 # Input data
@@ -28,7 +30,7 @@ source('0.0_settings.R')
 ```{r read, message = F}
 new <- FALSE
 if(new){
-    bio <- get.bio(species='maquereau',user="pec_iml_ro",password="Pecimlro_1!")
+    bio <- get.bio(species='maquereau',user=imlp.user,password=imlp.pass)
     save(bio,file=paste0('Rdata/bio_',Sys.Date(),'.Rdata'))
 }else{
     df <- file.info(list.files("Rdata/", full.names = T,pattern="bio_"))
@@ -346,7 +348,7 @@ Not included. Could predict waa (and impute missing values) based on model predi
 
 Test code removed.
 
-# FINAL: Fill and smooth 
+# Fill and smooth 
 
 Fit Noel Cadigan's state-space model for waa.
 1) filter out noise.
@@ -359,11 +361,13 @@ Fits an AR1 process in 3 directions (age, year, cohort). Available in catchR pac
 waam <- thiswaa[thiswaa$n>=10,]
 waam$cv <- with(waam,wsd/w)
 
-all <- expand.grid(year=1968:max(waam$year), age=min(waam$age):max(waam$age))
+all <- expand.grid(year=1968:this.year, age=min(waam$age):max(waam$age))
 waam <- merge(all, waam, all.x = TRUE)
 
 waa.fit <- armatrix.fit(year=waam$year,age=waam$age,x=waam$w,cv=waam$cv,shrink.cv = 0)
 waa.fit  # convergence ok
+
+save(waa.fit,file=paste0("Rdata/fit.armatrix/",this.year,"base_cv1shrink0.Rdata"))
 ```
 
 ## plots {.tabset}
@@ -403,13 +407,17 @@ armatrix.effects(waa.fit) # empty plot because of ggplotGrob function within (us
 armatrix.cvs(waa.fit,scale='free',ncol=3)
 ```
 
-## Table (final values)
-```{r waa_table, message = F}
-waa <- waa.fit$output
-waa <- waa[,c(1:2,9)]
-names(waa)[3] <- 'weight'
-waa$weight <- waa$weight*1000 #g for table
+# Save results
+```{r waa_result, message = F}
+waaf <- waa.fit$output
+waaf <- waaf[,c(1:2,9)]
+names(waaf)[3] <- 'weight'
 
-kable(waa,digits=0,caption="June/July weight-at-age (g)")
+s <- dcast(waaf,year~age,value.var = 'weight')
+s[,2:ncol(s)] <- round(s[,2:ncol(s)] ,3)
+write.csv(s, file=paste0('csv/waa_',this.year,'_base_cv1shrink0.csv'),row.names = FALSE)
+
+p <- armatrix.waa(waa.fit,ylab='Weight (kg)')+scale_color_viridis_d()
+ggsave(filename = paste0('img/waa',this.year,'.png'),plot = p,units = 'cm',height = 8,width = 14)
+
 ```
-
