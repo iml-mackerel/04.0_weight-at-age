@@ -9,19 +9,19 @@ dummy <- lapply(cran.packages, require, character.only = TRUE)
 ## github
 git.packages <- c('catchR','DFOdata')
 install.this <- git.packages[!(git.packages %in% utils::installed.packages()[,"Package"])]
-if('catchR' %in% install.this)  devtools::install_github("iml-assess/catchR")
+if('catchR' %in% install.this)  devtools::install_github("iml-assess/catchR@eli_parallel")
 if('DFOdata' %in% install.this)  devtools::install_github("im-assess/DFOdata")
 dummy <- lapply(git.packages, require, character.only = TRUE)
 
 ##### my directories ################################################################################
-dir.dat  <- 'data/'
-dir.Rdata <- 'Rdata/'
+dir.dat  <- '../../data/'
+dir.Rdata <- '../../Rdata/'
 
 ##### source src directory  ################################################################################
-invisible(sapply(list.files(pattern="[.]R$", path="R/", full.names=TRUE), source))
+invisible(sapply(list.files(pattern="[.]R$", path="../../R/", full.names=TRUE), source))
 
 ##### my ggplot theme ################################################################################
 theme_set(theme_mackerel())             # theme_mackerel from catchR
 
 ##### passwords databases #############################################################################
-source('passwords.R')
+source('../../passwords.R')

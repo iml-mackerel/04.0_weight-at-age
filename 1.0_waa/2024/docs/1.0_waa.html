@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2024-12-17" />
+
+<title>Start</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Mackerel Weight at age</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="0.0_settings.html">
+    <span class="fa fa-cogs"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="1.0_waa.html">Read and analyze</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Start</h1>
+<h4 class="date">2024-12-17</h4>
+
+</div>
+
+
+<div id="set-up" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> SET-UP</h1>
+<pre class="r"><code>source(&#39;../../0.0_settings.R&#39;)
+
+this.year &lt;- 2024</code></pre>
+</div>
+<div id="input-data" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Input data</h1>
+<div id="read" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Read</h2>
+<pre class="r"><code>new &lt;- T
+if(new){
+    bio &lt;- get.bio(species=&#39;maquereau&#39;,user=imlp.user,password=imlp.pass)
+    save(bio,file=paste0(&#39;../../Rdata/bio_&#39;,Sys.Date(),&#39;.Rdata&#39;))
+}else{
+    df &lt;- file.info(list.files(&quot;../../Rdata/&quot;, full.names = T,pattern=&quot;bio_&quot;))
+    load(rownames(df)[which.max(df$mtime)])
+}
+</code></pre>
+</div>
+<div id="subsetting-and-outlier-removal" class="section level2"
+number="2.2">
+<h2><span class="header-section-number">2.2</span> Subsetting and
+outlier removal</h2>
+<p>Could do outlier removal better.</p>
+<pre class="r"><code># subset
+bio.waa &lt;- bio[!is.na(bio$weight) &amp; 
+               !is.na(bio$agef) &amp; 
+                bio$agef&gt;0 &amp; 
+                bio$agef&lt;21,
+               c(&#39;year&#39;,&#39;month&#39;,&#39;date&#39;,&#39;gear&#39;,&#39;nafo&#39;,&#39;weight&#39;,&#39;agef&#39;,&#39;sample.id&#39;,&#39;length.frozen&#39;)]
+names(bio.waa)[7] &lt;- &#39;age&#39;
+names(bio.waa)[9] &lt;- &#39;length&#39;
+
+# remove outliers (see plot)
+bio.waa$outlier &lt;- FALSE
+bio.waa$outlier &lt;- ifelse(bio.waa$weight&lt;0.03,TRUE,bio.waa$outlier)              # less than 30gr
+bio.waa$outlier &lt;- ifelse(bio.waa$age&gt;17,TRUE,bio.waa$outlier)                   # at least 4 out of 6 age 18 have wrong length AND weight
+bio.waa[!bio.waa$outlier,] &lt;- ddply(bio.waa[!bio.waa$outlier,],c(&#39;age&#39;),transform,
+                                    outlier=ifelse((weight&lt;=quantile(weight,0.0001)|weight&gt;=quantile(weight,0.9999)),TRUE,outlier))  # quick and dirty way to remove extremes
+
+# cleaning
+bio.waa$age.group &lt;- ifelse(bio.waa$age &lt; 10, bio.waa$age, 10)
+bio.waa$length &lt;- roundFish(bio.waa$length*100,0.5) # round to half centimeters</code></pre>
+</div>
+<div id="plots" class="section level2 tabset" number="2.3">
+<h2 class="tabset"><span class="header-section-number">2.3</span>
+plots</h2>
+<div id="age-vs-weight" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> age vs weight</h3>
+<pre class="r"><code>ggplot(bio.waa,aes(x=age,y=weight,col=outlier))+
+    geom_point()</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20age_weight-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="calculations" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Calculations</h1>
+<div id="try-different-options" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Try different
+options</h2>
+<p>Even trial run with different selectivity gears (despite not a great
+idea).</p>
+<pre class="r"><code>bio.waa &lt;- bio.waa[!bio.waa$outlier,]
+bio.waa$outlier &lt;- NULL
+
+# 4T + gillnets + june/july
+df1 &lt;- bio.waa[bio.waa$month %in% c(6,7) &amp;
+               bio.waa$nafo %in% c(&#39;4T&#39;) &amp;
+               bio.waa$gear %in% c(&quot;GND&quot;, &quot;GNS&quot;, &quot;GN&quot;),]
+
+waa1 &lt;- get.waa(df1$year,df1$age.group,df1$weight,df1$sample.id)
+waa1$option &lt;- &#39;4T_gill_JunJul&#39;
+
+# 4TVWX + gillnets + june/july
+df2 &lt;- bio.waa[bio.waa$month %in% c(6,7) &amp;
+               bio.waa$nafo %in% c(&#39;4T&#39;, &quot;4V&quot;, &quot;4W&quot;, &quot;4X&quot;) &amp;
+               bio.waa$gear %in% c(&quot;GND&quot;, &quot;GNS&quot;, &quot;GN&quot;),]
+
+waa2 &lt;- get.waa(df2$year,df2$age.group,df2$weight,df2$sample.id)
+waa2$option &lt;- &#39;4TVWX_gill_JunJul&#39;
+
+# 4T + gillnets/line+jig + june/july
+df3 &lt;- bio.waa[bio.waa$month %in% c(6,7) &amp;
+               bio.waa$nafo %in% c(&#39;4T&#39;) &amp;
+               bio.waa$gear %in% c(&quot;GND&quot;, &quot;GNS&quot;, &quot;GN&quot;,&quot;LHM&quot;,&quot;LMP&quot;,&quot;LX&quot;,&quot;LHP&quot;),]
+
+waa3 &lt;- get.waa(df3$year,df3$age.group,df3$weight,df3$sample.id)
+waa3$option &lt;- &#39;4T_gillhandjig_JunJul&#39;
+
+# 4Tvwx + gillnets/line+jig + june/july
+df4 &lt;- bio.waa[bio.waa$month %in% c(6,7) &amp;
+               bio.waa$nafo %in% c(&#39;4T&#39;, &quot;4V&quot;, &quot;4W&quot;, &quot;4X&quot;) &amp;
+               bio.waa$gear %in% c(&quot;GND&quot;, &quot;GNS&quot;, &quot;GN&quot;,&quot;LHM&quot;,&quot;LMP&quot;,&quot;LX&quot;,&quot;LHP&quot;),]
+
+waa4 &lt;- get.waa(df4$year,df4$age.group,df4$weight,df4$sample.id)
+waa4$option &lt;- &#39;4TVWX_gillhandjig_JunJul&#39;</code></pre>
+</div>
+<div id="select-option" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Select option</h2>
+<p>Going with 4TVWX + gillnets + june/july</p>
+<pre class="r"><code>thisbio &lt;- df2
+thiswaa &lt;- waa2   </code></pre>
+</div>
+<div id="plots-1" class="section level2 tabset" number="3.3">
+<h2 class="tabset"><span class="header-section-number">3.3</span>
+plots</h2>
+<div id="waa" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> waa</h3>
+<pre class="r"><code>waa.comp &lt;- rbind(waa1,waa2,waa3,waa4)
+ggplot(waa.comp, aes(x=year, y=w, col=as.factor(age))) + 
+    geom_line(linewidth=1) + 
+    facet_wrap(~option)+
+    labs(x=&#39;Year&#39;,y=&#39;Weigt (kg)&#39;,col=&#39;Age&#39;)+
+    theme_minimal(base_size = 14) </code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20comparison_waa-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="number-of-fish" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> number of fish</h3>
+<pre class="r"><code>ggplot(waa.comp, aes(x=year, y=age)) + 
+    geom_tile(aes(fill=n)) + 
+    geom_text(data=waa.comp[waa.comp$n&lt;10,],aes(label=n))+
+    facet_wrap(~option)+
+    labs(x=&#39;Year&#39;,y=&#39;Age&#39;,fill=&#39;n&#39;)+
+    theme_minimal(base_size = 14)+
+    scale_fill_viridis_c(direction = -1)+
+    scale_x_continuous(expand=c(0,0))</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20comparison_nfish-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="number-of-samples" class="section level3" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> number of
+samples</h3>
+<pre class="r"><code>ggplot(waa.comp, aes(x=year, y=age)) + 
+    geom_tile(aes(fill=N)) + 
+    geom_text(data=waa.comp[waa.comp$N&lt;5,],aes(label=N))+
+    facet_wrap(~option)+
+    labs(x=&#39;Year&#39;,y=&#39;Age&#39;,fill=&#39;N&#39;)+
+    theme_minimal(base_size = 14)+
+    scale_fill_viridis_c(direction = -1)+
+    scale_x_continuous(expand=c(0,0))</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20comparison_Nsample-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="how-many-fish-do-we-minimally-need" class="section level1"
+number="4">
+<h1><span class="header-section-number">4</span> How many fish do we
+minimally need?</h1>
+<div id="simulation" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Simulation</h2>
+<pre class="r"><code>newm &lt;- T
+if(!newm){
+    df &lt;- file.info(list.files(&quot;../../Rdata/&quot;, full.names = T,pattern=&quot;sims_&quot;))
+    load(rownames(df)[which.max(df$mtime)])
+}else{
+    waa.tot &lt;- ddply(thisbio,c(&#39;age.group&#39;),summarise,w=mean(weight),wsd=sd(weight),n=length(weight))
+    re &lt;- function(test,true) (test-true)/true
+    
+    sims &lt;- ldply(1:1000,function(i){
+        ldply(unique(thisbio$age.group),function(a){
+            ldply(1:100,function(f){
+                  # sample from all ages (across all years to have enough to sample from; might not be the case for age 1)
+                  d &lt;- thisbio[thisbio$age.group==a &amp; !is.na(thisbio$age.group),]
+                  
+                  # Sample 1 to 100 fish weights for each step
+                  ws &lt;- sample(d$weight, f, replace = TRUE)
+                  
+                  # Calculate mean weight of fish sampled
+                  wav &lt;- mean(ws)
+                  
+                  # Estimate relative error
+                  RE &lt;- re(wav,waa.tot[waa.tot$age.group==a,&#39;w&#39;])
+                  
+                  return(c(sim=i,age=a,n=f,RE=RE))
+            })
+        })
+    })
+
+save(sims,file=paste0(&#39;../../Rdata/sims_&#39;,Sys.Date(),&#39;.Rdata&#39;)) 
+}
+
+check &lt;- ddply(sims,c(&#39;age&#39;,&#39;n&#39;),summarise,mean=mean(RE),low=mean(RE)-1.96*sd(RE),high=mean(RE)+1.96*sd(RE))
+
+pd &lt;- position_dodge(0.1) 
+plots &lt;- lapply(unique(check$age),function(x){
+    ggplot(check[check$age==x,], aes(x = n, y = mean)) +
+        geom_line(size = 1.5) +
+        geom_errorbar(size = 0.5, aes(ymin=low, ymax=high), width=1.5, position=pd) +
+        geom_line(position=pd, size=1) +
+        geom_point(position=pd, size=1) +
+        geom_hline(yintercept=0.1, linetype=&quot;dashed&quot;, color = &quot;red&quot;) +
+        geom_hline(yintercept=-0.1, linetype=&quot;dashed&quot;, color = &quot;red&quot;) +
+        theme_minimal(base_size = 14) + 
+        ylab(&quot;Relative error with 95%CI&quot;) + 
+        xlab(&quot;Number of fish sampled&quot;) +
+        scale_x_continuous(breaks = seq(0,100,5)) +
+        ggtitle(paste(&quot;Age&quot;, x, sep = &quot; &quot;))
+})
+## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
+
+
+#Remove year-age group that contain less than 10 fish </code></pre>
+</div>
+<div id="plots-2" class="section level2 tabset" number="4.2">
+<h2 class="tabset"><span class="header-section-number">4.2</span>
+plots</h2>
+<p>Note that this is an easy way to determine error in function of the
+number of fish measured. It might be overestimated because the true
+distribution of values (weights) is lower than assumed here (by grouping
+all years).</p>
+<div id="age1" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> age1</h3>
+<pre class="r"><code>plots[[1]]
+## Warning: `position_dodge()` requires non-overlapping x intervals.</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20re_age1-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="age2" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> age2</h3>
+<pre class="r"><code>plots[[2]]
+## Warning: `position_dodge()` requires non-overlapping x intervals.</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20re_age2-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="age3" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> age3</h3>
+<pre class="r"><code>plots[[3]]
+## Warning: `position_dodge()` requires non-overlapping x intervals.</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20re_age3-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="age4" class="section level3" number="4.2.4">
+<h3><span class="header-section-number">4.2.4</span> age4</h3>
+<pre class="r"><code>plots[[4]]
+## Warning: `position_dodge()` requires non-overlapping x intervals.</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20re_age4-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="age5" class="section level3" number="4.2.5">
+<h3><span class="header-section-number">4.2.5</span> age5</h3>
+<pre class="r"><code>plots[[5]]
+## Warning: `position_dodge()` requires non-overlapping x intervals.</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20re_age5-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="age6" class="section level3" number="4.2.6">
+<h3><span class="header-section-number">4.2.6</span> age6</h3>
+<pre class="r"><code>plots[[6]]
+## Warning: `position_dodge()` requires non-overlapping x intervals.</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20re_age6-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="age7" class="section level3" number="4.2.7">
+<h3><span class="header-section-number">4.2.7</span> age7</h3>
+<pre class="r"><code>plots[[7]]
+## Warning: `position_dodge()` requires non-overlapping x intervals.</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20re_age7-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="age8" class="section level3" number="4.2.8">
+<h3><span class="header-section-number">4.2.8</span> age8</h3>
+<pre class="r"><code>plots[[8]]
+## Warning: `position_dodge()` requires non-overlapping x intervals.</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20re_age8-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="age9" class="section level3" number="4.2.9">
+<h3><span class="header-section-number">4.2.9</span> age9</h3>
+<pre class="r"><code>plots[[9]]
+## Warning: `position_dodge()` requires non-overlapping x intervals.</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20re_age9-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="age10" class="section level3" number="4.2.10">
+<h3><span class="header-section-number">4.2.10</span> age10</h3>
+<pre class="r"><code>plots[[10]]
+## Warning: `position_dodge()` requires non-overlapping x intervals.</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20re_age10-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="what-is-the-effect-of-working-with-subsample-data"
+class="section level1" number="5">
+<h1><span class="header-section-number">5</span> What is the effect of
+working with subsample data?</h1>
+<p>Scale by catch length-frequencies.</p>
+<div id="read-1" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Read</h2>
+<pre class="r"><code>newf &lt;- FALSE
+if(newf){
+    lf &lt;- get.lf(species=&#39;maquereau&#39;,user=&quot;pec_iml_ro&quot;,password=&quot;Pecimlro_1!&quot;)
+    save(lf,file=paste0(&#39;../../Rdata/lf_&#39;,Sys.Date(),&#39;.Rdata&#39;))
+}else{
+    df &lt;- file.info(list.files(&quot;../../Rdata/&quot;, full.names = T,pattern=&quot;lf_&quot;))
+    load(rownames(df)[which.max(df$mtime)])
+}
+</code></pre>
+</div>
+<div id="proportions" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Proportions</h2>
+<pre class="r"><code>props &lt;- lf[!is.na(lf$length) &amp;
+            lf$month %in% unique(thisbio$month) &amp;
+            lf$nafo %in% unique(thisbio$nafo) &amp;
+            lf$gear %in% unique(thisbio$gear),]
+
+props &lt;- ddply(props,c(&#39;year&#39;,&#39;length&#39;),summarise,n=length(length))
+props &lt;- ddply(props,c(&#39;year&#39;),transform,prop=n/sum(n))
+
+props$length &lt;- roundFish(props$length*100,0.5)
+
+propsall &lt;- expand.grid(year=unique(thisbio$year),length=seq(min(thisbio$length,na.rm=TRUE),max(thisbio$length,na.rm=TRUE),by=0.5))
+propsall &lt;- merge(propsall,props,all.x=TRUE)
+propsall &lt;- ddply(propsall,c(&#39;year&#39;),transform,prop=zoo::na.locf(zoo::na.locf(prop,na.rm = FALSE), fromLast = TRUE)) # not great, but little impact
+
+thisbiolf &lt;- merge(thisbio,propsall,all.x=TRUE)
+thisbiolf[is.na(thisbiolf$prop),&#39;prop&#39;] &lt;- max(thisbiolf$prop,na.rm = T) # not great, but nearly all for same year so no impact
+
+waa5 &lt;- ddply(thisbiolf,c(&#39;year&#39;,&#39;age.group&#39;),summarise,
+          w=weighted.mean(weight,prop,na.rm=T),
+          wsd=NA, # see Hmish package
+          n=length(weight),
+          N=length(unique(sample.id)))
+waa5$option &lt;- &#39;with lf&#39;
+names(waa5)[2] &lt;- &#39;age&#39;</code></pre>
+</div>
+<div id="plots-3" class="section level2 tabset" number="5.3">
+<h2 class="tabset"><span class="header-section-number">5.3</span>
+plots</h2>
+<div id="comparison-pairwase" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> comparison
+pairwase</h3>
+<pre class="r"><code>waa.comp2 &lt;- rbind(thiswaa,waa5)
+ggplot(waa.comp2, aes(x=year, y=w, col=as.factor(age))) + 
+    geom_line(size=0.5) + 
+    facet_wrap(~option)+
+    labs(x=&#39;Year&#39;,y=&#39;Weigt (kg)&#39;,col=&#39;Age&#39;)+
+    theme_minimal(base_size = 14) </code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20waalf-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="comparison-by-age" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> comparison by
+age</h3>
+<pre class="r"><code>ggplot(waa.comp2, aes(x=year, y=w, col=option)) + 
+    geom_line(size=0.5) + 
+    facet_wrap(~age,scale=&#39;free_y&#39;)+
+    labs(x=&#39;Year&#39;,y=&#39;Weigt (kg)&#39;,col=&#39;Age&#39;)+
+    theme_minimal(base_size = 14) </code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20waalf2-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="length-props-facets" class="section level3" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> length props
+(facets)</h3>
+<pre class="r"><code>ggplot(propsall,aes(x=length,y=prop))+
+    geom_line(size=0.5)+
+    facet_wrap(year~.)
+## Warning: Removed 475 rows containing missing values or values outside the scale range (`geom_line()`).</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20lengthprops-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="length-props-superposed" class="section level3" number="5.3.4">
+<h3><span class="header-section-number">5.3.4</span> length props
+(superposed)</h3>
+<pre class="r"><code>ggplot(propsall,aes(x=length,y=prop,col=year,group=year))+
+    geom_line(size=0.5)
+## Warning: Removed 475 rows containing missing values or values outside the scale range (`geom_line()`).</code></pre>
+<p><img src="1.0_waa_files/figure-html/plot%20lengthprops2-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="what-if-i-would-have-used-a-model" class="section level1"
+number="6">
+<h1><span class="header-section-number">6</span> What if I would have
+used a model?</h1>
+<p>Not included. Could predict waa (and impute missing values) based on
+model predictions. However, need interactions (year*gear), nonlinear
+effects (year), etc. On a dataframe with millions of lines it is
+extremely slow. Appears overly complex and not very practical.</p>
+<p>Test code removed.</p>
+</div>
+<div id="fill-and-smooth" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Fill and smooth</h1>
+<p>Fit Noel Cadigan’s state-space model for waa. 1) filter out noise. 2)
+fill in gaps.</p>
+<p>Fits an AR1 process in 3 directions (age, year, cohort). Available in
+catchR package.</p>
+<div id="fit-model" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> fit model</h2>
+<pre class="r"><code>waam &lt;- thiswaa[thiswaa$n&gt;=10,]
+waam$cv &lt;- with(waam,wsd/w)
+
+all &lt;- expand.grid(year=1968:this.year, age=min(waam$age):max(waam$age))
+waam &lt;- merge(all, waam, all.x = TRUE)
+
+waa.fit &lt;- armatrix.fit(year=waam$year,age=waam$age,x=waam$w,cv=waam$cv,shrink.cv = 0)
+## Warning in armatrix.fit(year = waam$year, age = waam$age, x = waam$w, cv = waam$cv, : cvs equal to 0/NA replaced by value of historic 95% quantile
+waa.fit  # convergence ok
+
+save(waa.fit,file=paste0(&quot;../../Rdata/fit.armatrix/&quot;,this.year,&quot;base_cv1shrink0.Rdata&quot;))</code></pre>
+</div>
+<div id="plots-4" class="section level2 tabset" number="7.2">
+<h2 class="tabset"><span class="header-section-number">7.2</span>
+plots</h2>
+<div id="waa-1" class="section level3" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> waa</h3>
+<pre class="r"><code>p&lt;- armatrix.waa(waa.fit)+scale_color_viridis_d()+scale_y_continuous(limits=c(0,0.9),expand=c(0,0))
+
+p + labs(x=&quot;Année | Year&quot;, y= &quot;Poids | Weight (kg)&quot;, col=&quot;Âge | Age&quot;)</code></pre>
+<p><img src="1.0_waa_files/figure-html/waa_final-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<div id="predicted-obs" class="section level3" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Predicted obs</h3>
+<pre class="r"><code>p&lt;- armatrix.predobs(waa.fit,scale=&#39;free&#39;,ncol=4)
+
+p+ ggtitle(&quot;Prédit vs Observé | Predicted vs Observed&quot;) +labs(x=&quot;Année | Year&quot;, y=&quot;Poids à l&#39;âge | Weight-at-age (kg)&quot;)
+## Warning: Removed 234 rows containing missing values or values outside the scale range (`geom_point()`).</code></pre>
+<p><img src="1.0_waa_files/figure-html/waa_predobs-1.png" width="1056" style="display: block; margin: auto;" /></p>
+</div>
+<div id="predicted" class="section level3" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Predicted</h3>
+<pre class="r"><code>armatrix.pred(waa.fit,scale=&#39;free&#39;,ncol=3)</code></pre>
+<p><img src="1.0_waa_files/figure-html/waa_pred-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="resid-bubble" class="section level3" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> Resid bubble</h3>
+<pre class="r"><code>armatrix.res(waa.fit)
+## Warning: Removed 234 rows containing missing values or values outside the scale range (`geom_point()`).</code></pre>
+<p><img src="1.0_waa_files/figure-html/waa_res-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="resid-dot" class="section level3" number="7.2.5">
+<h3><span class="header-section-number">7.2.5</span> Resid dot</h3>
+<pre class="r"><code>   d &lt;- waa.fit$output
+    d$cohort &lt;- with(d, year - age)
+    p1 &lt;- ggplot(d, aes(x = year, y = res)) + geom_text(aes(label = age), 
+        size = 2) + geom_hline(yintercept = 0, linetype = &quot;dashed&quot;) + 
+        labs(y = &quot;&quot;, x = &quot;Année | Year&quot;) + geom_smooth()
+    p2 &lt;- ggplot(d, aes(x = cohort, y = res)) + geom_point(size = 1) + 
+        geom_hline(yintercept = 0, linetype = &quot;dashed&quot;) + labs(y = &quot;&quot;, 
+        x = &quot;Cohorte | Cohort&quot;) + geom_smooth()
+    p3 &lt;- ggplot(d, aes(x = age, y = res)) + geom_point(size = 1) + 
+        geom_hline(yintercept = 0, linetype = &quot;dashed&quot;) + labs(y = &quot;&quot;, 
+        x = &quot;Âge | Age&quot;)
+    p4 &lt;- ggplot(d, aes(x = pred_exp, y = res)) + geom_point(size = 1) + 
+        geom_hline(yintercept = 0, linetype = &quot;dashed&quot;) + labs(y = &quot;&quot;, 
+        x = &quot;Prédites | Predicted&quot;)
+    grid.arrange(p1 , p2, p3, p4, ncol = 2, left = &quot;Résidus standardisés | Standardized residuals&quot;)
+## Warning: Removed 234 rows containing non-finite outside the scale range (`stat_smooth()`).
+## Warning: Removed 234 rows containing missing values or values outside the scale range (`geom_text()`).
+## Warning: Removed 234 rows containing non-finite outside the scale range (`stat_smooth()`).
+## Warning: Removed 234 rows containing missing values or values outside the scale range (`geom_point()`).
+## Removed 234 rows containing missing values or values outside the scale range (`geom_point()`).
+## Removed 234 rows containing missing values or values outside the scale range (`geom_point()`).</code></pre>
+<p><img src="1.0_waa_files/figure-html/waa_res2-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="effects" class="section level3" number="7.2.6">
+<h3><span class="header-section-number">7.2.6</span> effects</h3>
+<pre class="r"><code>armatrix.effects(waa.fit) # empty plot because of ggplotGrob function within (used to align plots)</code></pre>
+<p><img src="1.0_waa_files/figure-html/waa_effects-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cvs" class="section level3" number="7.2.7">
+<h3><span class="header-section-number">7.2.7</span> cvs</h3>
+<pre class="r"><code>armatrix.cvs(waa.fit,scale=&#39;free&#39;,ncol=3)
+## Warning: Removed 38 rows containing missing values or values outside the scale range (`geom_line()`).</code></pre>
+<p><img src="1.0_waa_files/figure-html/waa_cv-1.png" width="960" style="display: block; margin: auto;" />
+# Save results</p>
+<pre class="r"><code>waaf &lt;- waa.fit$output
+waaf &lt;- waaf[,c(1:2,9)]
+names(waaf)[3] &lt;- &#39;weight&#39;
+
+s &lt;- dcast(waaf,year~age,value.var = &#39;weight&#39;)
+s[,2:ncol(s)] &lt;- round(s[,2:ncol(s)] ,3)
+write.csv(s, file=paste0(&#39;../../csv/waa_&#39;,this.year,&#39;_base_cv1shrink0.csv&#39;),row.names = FALSE)
+
+p &lt;- armatrix.waa(waa.fit,ylab=&#39;Weight (kg)&#39;)+scale_color_viridis_d()
+ggsave(filename = paste0(&#39;../../img/waa&#39;,this.year,&#39;.png&#39;),plot = p,units = &#39;cm&#39;,height = 8,width = 14)</code></pre>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

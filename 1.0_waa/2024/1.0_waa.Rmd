@@ -20,20 +20,20 @@ options(width = 300)
 ```    
 
 ```{r settings, message = F}
-source('0.0_settings.R')
+source('../../0.0_settings.R')
 
-this.year <- 2022
+this.year <- 2024
 ```
 
 # Input data
 ## Read
 ```{r read, message = F}
-new <- FALSE
+new <- T
 if(new){
     bio <- get.bio(species='maquereau',user=imlp.user,password=imlp.pass)
-    save(bio,file=paste0('Rdata/bio_',Sys.Date(),'.Rdata'))
+    save(bio,file=paste0('../../Rdata/bio_',Sys.Date(),'.Rdata'))
 }else{
-    df <- file.info(list.files("Rdata/", full.names = T,pattern="bio_"))
+    df <- file.info(list.files("../../Rdata/", full.names = T,pattern="bio_"))
     load(rownames(df)[which.max(df$mtime)])
 }
 
@@ -124,7 +124,7 @@ thiswaa <- waa2
 ```{r plot comparison_waa}
 waa.comp <- rbind(waa1,waa2,waa3,waa4)
 ggplot(waa.comp, aes(x=year, y=w, col=as.factor(age))) + 
-    geom_line(size=1) + 
+    geom_line(linewidth=1) + 
     facet_wrap(~option)+
     labs(x='Year',y='Weigt (kg)',col='Age')+
     theme_minimal(base_size = 14) 
@@ -157,9 +157,9 @@ ggplot(waa.comp, aes(x=year, y=age)) +
 # How many fish do we minimally need?
 ## Simulation
 ```{r plot fish_min}
-newm <- FALSE
+newm <- T
 if(!newm){
-    df <- file.info(list.files("Rdata/", full.names = T,pattern="sims_"))
+    df <- file.info(list.files("../../Rdata/", full.names = T,pattern="sims_"))
     load(rownames(df)[which.max(df$mtime)])
 }else{
     waa.tot <- ddply(thisbio,c('age.group'),summarise,w=mean(weight),wsd=sd(weight),n=length(weight))
@@ -185,7 +185,7 @@ if(!newm){
         })
     })
 
-save(sims,file=paste0('Rdata/sims_',Sys.Date(),'.Rdata')) 
+save(sims,file=paste0('../../Rdata/sims_',Sys.Date(),'.Rdata')) 
 }
 
 check <- ddply(sims,c('age','n'),summarise,mean=mean(RE),low=mean(RE)-1.96*sd(RE),high=mean(RE)+1.96*sd(RE))
@@ -272,9 +272,9 @@ Scale by catch length-frequencies.
 newf <- FALSE
 if(newf){
     lf <- get.lf(species='maquereau',user="pec_iml_ro",password="Pecimlro_1!")
-    save(lf,file=paste0('Rdata/lf_',Sys.Date(),'.Rdata'))
+    save(lf,file=paste0('../../Rdata/lf_',Sys.Date(),'.Rdata'))
 }else{
-    df <- file.info(list.files("Rdata/", full.names = T,pattern="lf_"))
+    df <- file.info(list.files("../../Rdata/", full.names = T,pattern="lf_"))
     load(rownames(df)[which.max(df$mtime)])
 }
 
@@ -367,19 +367,25 @@ waam <- merge(all, waam, all.x = TRUE)
 waa.fit <- armatrix.fit(year=waam$year,age=waam$age,x=waam$w,cv=waam$cv,shrink.cv = 0)
 waa.fit  # convergence ok
 
-save(waa.fit,file=paste0("Rdata/fit.armatrix/",this.year,"base_cv1shrink0.Rdata"))
+save(waa.fit,file=paste0("../../Rdata/fit.armatrix/",this.year,"base_cv1shrink0.Rdata"))
 ```
 
 ## plots {.tabset}
 
 ### waa
 ```{r waa_final, message = F, fig.height = 3,fig.width = 5,results = 'hide',message=FALSE}
-armatrix.waa(waa.fit)+scale_color_viridis_d()+scale_y_continuous(limits=c(0,0.9),expand=c(0,0))
+p<- armatrix.waa(waa.fit)+scale_color_viridis_d()+scale_y_continuous(limits=c(0,0.9),expand=c(0,0))
+
+p + labs(x="Année | Year", y= "Poids | Weight (kg)", col="Âge | Age")
+
 ```
 
 ### Predicted obs
-```{r waa_predobs, message = F, fig.height = 10,fig.width = 10,results = 'hide',message=FALSE}
-armatrix.predobs(waa.fit,scale='free',ncol=3)
+```{r waa_predobs, message = F, fig.height = 6,fig.width = 11,results = 'hide',message=FALSE}
+p<- armatrix.predobs(waa.fit,scale='free',ncol=4)
+
+p+ ggtitle("Prédit vs Observé | Predicted vs Observed") +labs(x="Année | Year", y="Poids à l'âge | Weight-at-age (kg)")
+
 ```
 
 ### Predicted
@@ -393,8 +399,24 @@ armatrix.res(waa.fit)
 ```
 
 ### Resid dot
-```{r waa_res2, message = F, fig.height = 10,fig.width = 10,results = 'hide',message=FALSE}
-armatrix.res2(waa.fit)
+```{r waa_res2, message = F, fig.height = 5,fig.width = 10,results = 'hide',message=FALSE}
+   d <- waa.fit$output
+    d$cohort <- with(d, year - age)
+    p1 <- ggplot(d, aes(x = year, y = res)) + geom_text(aes(label = age), 
+        size = 2) + geom_hline(yintercept = 0, linetype = "dashed") + 
+        labs(y = "", x = "Année | Year") + geom_smooth()
+    p2 <- ggplot(d, aes(x = cohort, y = res)) + geom_point(size = 1) + 
+        geom_hline(yintercept = 0, linetype = "dashed") + labs(y = "", 
+        x = "Cohorte | Cohort") + geom_smooth()
+    p3 <- ggplot(d, aes(x = age, y = res)) + geom_point(size = 1) + 
+        geom_hline(yintercept = 0, linetype = "dashed") + labs(y = "", 
+        x = "Âge | Age")
+    p4 <- ggplot(d, aes(x = pred_exp, y = res)) + geom_point(size = 1) + 
+        geom_hline(yintercept = 0, linetype = "dashed") + labs(y = "", 
+        x = "Prédites | Predicted")
+    grid.arrange(p1 , p2, p3, p4, ncol = 2, left = "Résidus standardisés | Standardized residuals")
+
+
 ```
 
 ### effects
@@ -406,7 +428,6 @@ armatrix.effects(waa.fit) # empty plot because of ggplotGrob function within (us
 ```{r waa_cv, message = F, fig.height = 10,fig.width = 10,results = 'hide',message=FALSE}
 armatrix.cvs(waa.fit,scale='free',ncol=3)
 ```
-
 # Save results
 ```{r waa_result, message = F}
 waaf <- waa.fit$output
@@ -415,9 +436,8 @@ names(waaf)[3] <- 'weight'
 
 s <- dcast(waaf,year~age,value.var = 'weight')
 s[,2:ncol(s)] <- round(s[,2:ncol(s)] ,3)
-write.csv(s, file=paste0('csv/waa_',this.year,'_base_cv1shrink0.csv'),row.names = FALSE)
+write.csv(s, file=paste0('../../csv/waa_',this.year,'_base_cv1shrink0.csv'),row.names = FALSE)
 
 p <- armatrix.waa(waa.fit,ylab='Weight (kg)')+scale_color_viridis_d()
-ggsave(filename = paste0('img/waa',this.year,'.png'),plot = p,units = 'cm',height = 8,width = 14)
-
+ggsave(filename = paste0('../../img/waa',this.year,'.png'),plot = p,units = 'cm',height = 8,width = 14)
 ```
