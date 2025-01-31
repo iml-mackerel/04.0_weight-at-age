@@ -157,7 +157,7 @@ ggplot(waa.comp, aes(x=year, y=age)) +
 # How many fish do we minimally need?
 ## Simulation
 ```{r plot fish_min}
-newm <- T
+newm <- F
 if(!newm){
     df <- file.info(list.files("../../Rdata/", full.names = T,pattern="sims_"))
     load(rownames(df)[which.max(df$mtime)])
@@ -374,7 +374,7 @@ save(waa.fit,file=paste0("../../Rdata/fit.armatrix/",this.year,"base_cv1shrink0.
 
 ### waa
 ```{r waa_final, message = F, fig.height = 3,fig.width = 5,results = 'hide',message=FALSE}
-p<- armatrix.waa(waa.fit)+scale_color_viridis_d()+scale_y_continuous(limits=c(0,0.9),expand=c(0,0))
+p<- armatrix.waa(waa.fit)+scale_color_viridis_d(guide="none")+scale_y_continuous(limits=c(0,0.9),expand=c(0,0))
 
 p + labs(x="Année | Year", y= "Poids | Weight (kg)", col="Âge | Age")
 
