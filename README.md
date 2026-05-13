@@ -9,6 +9,6 @@
 
 The rmarkdown output can be previewed at :
 https://iml-mackerel.github.io/04.0_weight-at-age/
-
+ 
 Depricated folder contains older scripts (with sometimes extra tests, etc.)
 

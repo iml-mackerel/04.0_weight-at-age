@@ -3,8 +3,6 @@ output_dir: "docs"
 navbar:
   title: "Mackerel Weight at age"
   left:
-    - icon: fa-cogs
-      href: 0.0_settings.html
     - text: "Read and analyze"
       href: 1.0_waa.html
 
