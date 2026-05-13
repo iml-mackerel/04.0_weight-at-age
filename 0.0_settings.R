@@ -10,7 +10,7 @@ dummy <- lapply(cran.packages, require, character.only = TRUE)
 git.packages <- c('catchR','DFOdata')
 install.this <- git.packages[!(git.packages %in% utils::installed.packages()[,"Package"])]
 if('catchR' %in% install.this)  devtools::install_github("iml-assess/catchR@eli_parallel")
-if('DFOdata' %in% install.this)  devtools::install_github("im-assess/DFOdata")
+if('DFOdata' %in% install.this)  devtools::install_github("iml-assess/DFOdata")
 dummy <- lapply(git.packages, require, character.only = TRUE)
 
 ##### my directories ################################################################################
