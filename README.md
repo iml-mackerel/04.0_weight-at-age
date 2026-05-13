@@ -7,8 +7,8 @@
 5. Tables and figures
 
 
-The rmarkdown output can be previewed at (note that this is slow and does not include all functionalities):
-https://htmlpreview.github.io/?https://raw.githubusercontent.com/iml-mackerel/04.0_weight-at-age/master/1.0_waa.html
+The rmarkdown output can be previewed at :
+https://iml-mackerel.github.io/04.0_weight-at-age/
 
-Depricated folder contains older scripts (with somethimes extra tests, etc.)
+Depricated folder contains older scripts (with sometimes extra tests, etc.)
 
